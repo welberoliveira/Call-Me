@@ -8,7 +8,7 @@ public enum Status
 {
     Prospect, Lead, Cliente, PosVenda, Desistiu
 }
-public class Pessoa
+public class Pessoa //student
 {
     public int ID { get; set; }
 

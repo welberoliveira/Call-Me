@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CallMe.Models;
 
-public class Categoria
+public class Categoria //departament
 {
     public int ID { get; set; }
 

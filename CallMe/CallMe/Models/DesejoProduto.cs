@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace CallMe.Models;
+namespace CallMe.Models; 
 
 public enum Grade
 {
     A, B, C, D, F
 }
 
-public class DesejoProduto
+public class DesejoProduto //enrollment
 {
     public int EnrollmentID { get; set; }
     public int CourseID { get; set; }

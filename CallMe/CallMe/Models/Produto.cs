@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace CallMe.Models;
 
-public class Produto
+public class Produto // course
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     [Display(Name = "Código")]
