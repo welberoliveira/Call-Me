@@ -1,0 +1,81 @@
+﻿@page
+@model CallMe.Pages.Pessoas.IndexModel
+@{
+    ViewData["Title"] = "CallMe Pessoas";
+}
+
+<h2>Pessoas</h2>
+<p>
+    <a asp-page="Create" class="btn btn-primary">Cadastar nova Pessoa</a>
+</p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Buscar por nome:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+            <a class="btn btn-outline-primary" asp-page="./Index">Ver lista completa</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FirstSort">
+                    Nome
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    Data de Cadastro
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pessoas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                </td>
+                <td>
+                    @if (!item.Equals(null))
+                    {
+                        @item.DataCadastro.ToString("dd-MM-yyyy")
+                        ;
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ID">Alterar</a>
+                    <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.ID">Detalhes</a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ID">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.Pessoas.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Pessoas.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Pessoas.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Anterior
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Pessoas.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Próximo
+</a>
