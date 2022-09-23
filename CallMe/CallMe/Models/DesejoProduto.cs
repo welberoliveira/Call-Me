@@ -1,20 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace CallMe.Models; 
 
-public enum Grade
+public enum StatusDesejoProduto
 {
-    A, B, C, D, F
+    Informações, Compra, NegociaçãoDívida, Cancelamento
 }
 
 public class DesejoProduto //enrollment
 {
-    public int EnrollmentID { get; set; }
-    public int CourseID { get; set; }
-    public int StudentID { get; set; }
-    [DisplayFormat(NullDisplayText = "No grade")]
-    public Grade? Grade { get; set; }
+    public int ID { get; set; }
+    public int ProdutoID { get; set; }
+    public int PessoaID { get; set; }
+    [DisplayFormat(NullDisplayText = "Sem Status")]
+    public StatusDesejoProduto? StatusDesejoProduto { get; set; }
 
     [Display(Name = "Produto")]
     public Produto Produto { get; set; }
