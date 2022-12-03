@@ -12,5 +12,5 @@ public class Categoria //departament
 
     public string Observacao { get; set; }
 
-    public ICollection<Produto> Produtos { get; set; }
+    public ICollection<Produto?> ?Produtos { get; set; }
 }

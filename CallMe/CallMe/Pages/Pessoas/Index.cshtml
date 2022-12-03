@@ -40,6 +40,11 @@
                         Data de Cadastro
                     </a>
                 </th>
+                <th>
+                    <a asp-page="./Index">
+                        Status da Pessoa
+                    </a>
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -53,8 +58,13 @@
                     <td>
                         @if (!item.Equals(null))
                         {
-                            @item.DataCadastro.ToString("dd-MM-yyyy")
-                            ;
+                            @item.DataCadastro.ToString("dd-MM-yyyy");
+                        }
+                    </td>
+                    <td>
+                        @if (!item.Equals(null))
+                        {
+                            @item.StatusPessoa;
                         }
                     </td>
                     <td>

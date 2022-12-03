@@ -1,0 +1,47 @@
+﻿@page
+@model CallMe.Pages.Categorias.IndexModel
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "CallMe Categorias";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h2>Categorias</h2>
+
+    <p>
+        <a asp-page="Create" class="btn btn-primary">Cadastrar nova Categoria</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria.Observacao)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categorias)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observacao)
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ID">Alterar</a>
+                        <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.ID">Detalhes</a>
+                        <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ID">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

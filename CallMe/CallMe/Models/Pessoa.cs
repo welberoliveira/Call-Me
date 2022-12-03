@@ -24,10 +24,11 @@ public class Pessoa //student
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-    [Display(Name = "Data Cadastro")]
+    [Display(Name = "Data de Cadastro")]
     public DateTime DataCadastro { get; set; }
 
     [DisplayFormat(NullDisplayText = "Sem Status")]
+    [Display(Name = "Status da Pessoa")]
     public StatusPessoa? StatusPessoa { get; set; }
 
     [Display(Name = "Nome completo")]
@@ -38,7 +39,4 @@ public class Pessoa //student
             return Nome + " " + Sobrenome;
         }
     }
-
-    [Display(Name = "Disciplinas matriculadas")]
-    public ICollection<DesejoProduto> DesejoProdutos { get; set; }
 }

@@ -16,9 +16,5 @@ public class Produto // course
 
     public string? Observacao { get; set; }
 
-    [Required]
-    public int CategoriaID { get; set; }
-
     public Categoria Categoria { get; set; }
-    public ICollection<DesejoProduto> DesejoProdutos { get; set; }
 }

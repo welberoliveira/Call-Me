@@ -1,0 +1,51 @@
+﻿@page
+@model CallMe.Pages.Pessoas.EditModel
+@{
+    ViewData["Title"] = "Alteração de Pessoa";
+}
+
+<h1>Alterar Pessoa</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Pessoa.ID" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Pessoa.Nome)
+                <input asp-for="Pessoa.Nome" class="form-control" />
+                <span asp-validation-for="Pessoa.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Pessoa.Sobrenome)
+                <input asp-for="Pessoa.Sobrenome" class="form-control" />
+                <span asp-validation-for="Pessoa.Sobrenome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Pessoa.DataCadastro)
+                <input asp-for="Pessoa.DataCadastro" class="form-control" />
+                <span asp-validation-for="Pessoa.DataCadastro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Pessoa.StatusPessoa)
+                <select asp-for="Pessoa.StatusPessoa" class="form-control">
+                    <option value="Prospect">Prospect</option>
+                    <option value="Lead">Lead</option>
+                    <option value="Cliente">Cliente</option>
+                    <option value="PosVenda">PosVenda</option>
+                    <option value="Desistiu">Desistiu</option>
+                </select>
+                <span asp-validation-for="Pessoa.StatusPessoa" class="text-danger" />
+            </div>
+            <div class="form-group mt-2">
+                <a asp-page="./Index" class="btn btn-info">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+    {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
