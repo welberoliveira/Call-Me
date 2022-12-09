@@ -4,7 +4,7 @@ namespace CallMe.Models;
 
 public class Categoria //departament
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     [StringLength(50, MinimumLength = 3)]
     [Display(Name = "Descrição")]

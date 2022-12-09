@@ -3,13 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CallMe.Models;
 
-public enum StatusPessoa
-{
-    Prospect, Lead, Cliente, PosVenda, Desistiu
-}
 public class Pessoa //student
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [StringLength(50)]
@@ -26,11 +22,7 @@ public class Pessoa //student
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     [Display(Name = "Data de Cadastro")]
     public DateTime DataCadastro { get; set; }
-
-    [DisplayFormat(NullDisplayText = "Sem Status")]
-    [Display(Name = "Status da Pessoa")]
-    public StatusPessoa? StatusPessoa { get; set; }
-
+     
     [Display(Name = "Nome completo")]
     public string NomeCompleto
     {
@@ -39,4 +31,7 @@ public class Pessoa //student
             return Nome + " " + Sobrenome;
         }
     }
+    [Display(Name = "Status do Cliente")]
+    public int PessoaStatusId { get; set; }
+    public PessoaStatus? PessoaStatus { get; set; }
 }

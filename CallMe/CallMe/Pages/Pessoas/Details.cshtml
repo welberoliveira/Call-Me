@@ -1,10 +1,10 @@
 ﻿@page
 @model CallMe.Pages.Pessoas.DetailsModel
 @{
-    ViewData["Title"] = "Detalhes da Pessoa";
+    ViewData["Title"] = "Detalhes do Clientes";
 }
 
-<h1>Detalhes do Pessoa</h1>
+<h1>Detalhes do Clientes</h1>
 
 <div>
     <hr />
@@ -22,14 +22,14 @@
             @Html.DisplayFor(model => model.Pessoa.DataCadastro)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pessoa.StatusPessoa)
+            @Html.DisplayNameFor(model => model.Pessoa.PessoaStatus)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pessoa.StatusPessoa)
+            @Html.DisplayFor(model => model.Pessoa.PessoaStatus)
         </dd>
     </dl>
 </div>
 <div>
     <a asp-page="./Index" class="btn btn-info">Voltar</a>
-    <a asp-page="./Edit" class="btn btn-primary" asp-route-id="@Model.Pessoa.ID">Ir para Alteração</a>
+    <a asp-page="./Edit" class="btn btn-primary" asp-route-id="@Model.Pessoa.Id">Ir para Alteração</a>
 </div>

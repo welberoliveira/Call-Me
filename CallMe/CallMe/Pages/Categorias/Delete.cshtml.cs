@@ -31,7 +31,7 @@ namespace CallMe.Pages.Categorias
 
             Categoria = await _context.Categorias
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Categoria == null)
             {

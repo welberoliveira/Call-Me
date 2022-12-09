@@ -1,10 +1,10 @@
 ﻿@page
 @model CallMe.Pages.Pessoas.CreateModel
 @{
-    ViewData["Title"] = "Cadastrar Pessoa";
+    ViewData["Title"] = "Cadastrar Clientes";
 }
 
-<h1>Cadastrar Pessoa</h1>
+<h1>Cadastrar Clientes</h1>
 
 <hr />
 <div class="row">
@@ -28,15 +28,12 @@
                 <span asp-validation-for="Pessoa.DataCadastro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Pessoa.StatusPessoa)
-                <select asp-for="Pessoa.StatusPessoa" class="form-control">
-                    <option value="Prospect">Prospect</option>
-                    <option value="Lead">Lead</option>
-                    <option value="Cliente">Cliente</option>
-                    <option value="PosVenda">PosVenda</option>
-                    <option value="Desistiu">Desistiu</option>
+                @Html.DisplayNameFor(model => model.Pessoa.PessoaStatusId)
+                <select asp-for="Pessoa.PessoaStatusId" class="form-control"
+                        asp-items="@Model.StatusNomeSelect">
+                    <option value="">Selecione um Status</option>
                 </select>
-                <span asp-validation-for="Pessoa.StatusPessoa" class="text-danger" />
+                <span asp-validation-for="Pessoa.PessoaStatusId" class="text-danger" />
             </div>
             <div class="form-group mt-2">
                 <a asp-page="./Index" class="btn btn-info">Voltar</a>

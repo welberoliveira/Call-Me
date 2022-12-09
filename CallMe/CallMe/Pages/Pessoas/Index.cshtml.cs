@@ -42,8 +42,9 @@ namespace CallMe.Pages.Pessoas
 
             CurrentFilter = searchString;
 
-            IQueryable<Pessoa> studentsIQ = from s in _context.Pessoas
-                                             select s;
+            IQueryable<Pessoa> studentsIQ = _context.Pessoas
+                                            .Include(d => d.PessoaStatus);
+            //from s in _context.Pessoas                                             select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 studentsIQ = studentsIQ.Where(s => s.Sobrenome.Contains(searchString)
@@ -66,7 +67,7 @@ namespace CallMe.Pages.Pessoas
                     studentsIQ = studentsIQ.OrderByDescending(s => s.DataCadastro);
                     break;
                 default:
-                    studentsIQ = studentsIQ.OrderByDescending(s => s.ID);
+                    studentsIQ = studentsIQ.OrderByDescending(s => s.Id);
                     break;
             }
 

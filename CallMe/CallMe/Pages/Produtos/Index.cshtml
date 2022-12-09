@@ -2,13 +2,13 @@
 @model CallMe.Pages.Produtos.IndexModel
 
 @{
-    ViewData["Title"] = "Cursos";
+    ViewData["Title"] = "Produto/Serviço";
 }
 
-<h2>Cursos</h2>
+<h2>Produto/Serviço</h2>
 
 <p>
-    <a asp-page="Create" class="btn btn-primary">Cadastrar novo Curso</a>
+    <a asp-page="Create" class="btn btn-primary">Cadastrar novo Produto/Serviço</a>
 </p>
 <table class="table">
     <thead>
@@ -39,9 +39,9 @@
                     @Html.DisplayFor(modelItem => item.Categoria.Nome)
                 </td>
                 <td>
-                    <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ID">Alterar</a>
-                    <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.ID">Detalhes</a>
-                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.ID">Excluir</a>
+                    <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Alterar</a>
+                    <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.Id">Detalhes</a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Excluir</a>
                 </td>
             </tr>
         }

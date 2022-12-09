@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using CallMe.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CallMe.Pages.Pessoas
 {
@@ -15,6 +16,7 @@ namespace CallMe.Pages.Pessoas
 
         [BindProperty]
         public Pessoa Pessoa { get; set; } = default!;
+        public SelectList StatusNomeSelect { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,6 +31,11 @@ namespace CallMe.Pages.Pessoas
             {
                 return NotFound();
             }
+
+            var StatusQuery = _context.Categorias
+                                 .Select(a => new { a.Id, a.Nome });
+            StatusNomeSelect = new SelectList(StatusQuery, "Id", "Nome");
+
             return Page();
         }
 
@@ -44,7 +51,7 @@ namespace CallMe.Pages.Pessoas
             if (await TryUpdateModelAsync<Pessoa>(
                 PessoaToUpdate,
                 "Pessoa",
-                s => s.Nome, s => s.Sobrenome, s => s.DataCadastro, s => s.StatusPessoa))
+                s => s.Nome, s => s.Sobrenome, s => s.DataCadastro, s => s.PessoaStatus))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
@@ -55,7 +62,7 @@ namespace CallMe.Pages.Pessoas
 
         private bool PessoaExists(int id)
         {
-            return _context.Pessoas.Any(e => e.ID == id);
+            return _context.Pessoas.Any(e => e.Id == id);
         }
     }
 }

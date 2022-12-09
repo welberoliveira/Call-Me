@@ -22,7 +22,7 @@ namespace CallMe.Pages.Pessoas
             }
 
             Pessoa = await _context.Pessoas
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id== id);
 
             if (Pessoa == null)
             {

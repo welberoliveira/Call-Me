@@ -1,17 +1,17 @@
 ﻿@page
 @model CallMe.Pages.Pessoas.EditModel
 @{
-    ViewData["Title"] = "Alteração de Pessoa";
+    ViewData["Title"] = "Alteração de Clientes";
 }
 
-<h1>Alterar Pessoa</h1>
+<h1>Alterar Clientes</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Pessoa.ID" />
+            <input type="hidden" asp-for="Pessoa.Id" />
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Pessoa.Nome)
                 <input asp-for="Pessoa.Nome" class="form-control" />
@@ -28,15 +28,11 @@
                 <span asp-validation-for="Pessoa.DataCadastro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Pessoa.StatusPessoa)
-                <select asp-for="Pessoa.StatusPessoa" class="form-control">
-                    <option value="Prospect">Prospect</option>
-                    <option value="Lead">Lead</option>
-                    <option value="Cliente">Cliente</option>
-                    <option value="PosVenda">PosVenda</option>
-                    <option value="Desistiu">Desistiu</option>
+                @Html.DisplayNameFor(model => model.Pessoa.PessoaStatus)
+                <select asp-for="@Model.StatusNomeSelect" class="form-control">
+                    <option value="">Selecione um Status</option>
                 </select>
-                <span asp-validation-for="Pessoa.StatusPessoa" class="text-danger" />
+                <span asp-validation-for="Pessoa.PessoaStatus" class="text-danger" />
             </div>
             <div class="form-group mt-2">
                 <a asp-page="./Index" class="btn btn-info">Voltar</a>

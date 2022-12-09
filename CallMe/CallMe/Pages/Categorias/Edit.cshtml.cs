@@ -55,7 +55,7 @@ namespace CallMe.Pages.Categorias
 
         private bool CategoriaExists(int id)
         {
-            return _context.Categorias.Any(e => e.ID == id);
+            return _context.Categorias.Any(e => e.Id == id);
         }
     }
 }

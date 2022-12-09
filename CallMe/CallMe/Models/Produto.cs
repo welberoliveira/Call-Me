@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CallMe.Models;
 
-public class Produto // course
+public class Produto 
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     [Display(Name = "Código")]
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [StringLength(50, MinimumLength = 3)]
@@ -16,5 +15,6 @@ public class Produto // course
 
     public string? Observacao { get; set; }
 
-    public Categoria Categoria { get; set; }
+    public int? CategoriaID { get; set; }
+    public Categoria? Categoria { get; set; }
 }

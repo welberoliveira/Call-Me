@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CallMe.Data.Migrations
+namespace CallMe.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220923160957_Tabelas")]
-    partial class Tabelas
+    [Migration("20221208002745_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,11 @@ namespace CallMe.Data.Migrations
 
             modelBuilder.Entity("CallMe.Models.Categoria", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -41,44 +41,18 @@ namespace CallMe.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("CallMe.Models.DesejoProduto", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int>("PessoaID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdutoID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StatusDesejoProduto")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("PessoaID");
-
-                    b.HasIndex("ProdutoID");
-
-                    b.ToTable("DesejoProdutos");
-                });
-
             modelBuilder.Entity("CallMe.Models.Pessoa", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
@@ -89,25 +63,47 @@ namespace CallMe.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("FirstName");
 
+                    b.Property<int>("PessoaStatusId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Sobrenome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("StatusPessoa")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ID");
+                    b.HasIndex("PessoaStatusId");
 
                     b.ToTable("Pessoas");
                 });
 
-            modelBuilder.Entity("CallMe.Models.Produto", b =>
+            modelBuilder.Entity("CallMe.Models.PessoaStatus", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoriaID")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PessoaStatuss");
+                });
+
+            modelBuilder.Entity("CallMe.Models.Produto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CategoriaID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -118,7 +114,7 @@ namespace CallMe.Data.Migrations
                     b.Property<string>("Observacao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoriaID");
 
@@ -327,32 +323,22 @@ namespace CallMe.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CallMe.Models.DesejoProduto", b =>
+            modelBuilder.Entity("CallMe.Models.Pessoa", b =>
                 {
-                    b.HasOne("CallMe.Models.Pessoa", "Pessoa")
-                        .WithMany("DesejoProdutos")
-                        .HasForeignKey("PessoaID")
+                    b.HasOne("CallMe.Models.PessoaStatus", "PessoaStatus")
+                        .WithMany("Pessoas")
+                        .HasForeignKey("PessoaStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CallMe.Models.Produto", "Produto")
-                        .WithMany("DesejoProdutos")
-                        .HasForeignKey("ProdutoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pessoa");
-
-                    b.Navigation("Produto");
+                    b.Navigation("PessoaStatus");
                 });
 
             modelBuilder.Entity("CallMe.Models.Produto", b =>
                 {
                     b.HasOne("CallMe.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
-                        .HasForeignKey("CategoriaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaID");
 
                     b.Navigation("Categoria");
                 });
@@ -413,14 +399,9 @@ namespace CallMe.Data.Migrations
                     b.Navigation("Produtos");
                 });
 
-            modelBuilder.Entity("CallMe.Models.Pessoa", b =>
+            modelBuilder.Entity("CallMe.Models.PessoaStatus", b =>
                 {
-                    b.Navigation("DesejoProdutos");
-                });
-
-            modelBuilder.Entity("CallMe.Models.Produto", b =>
-                {
-                    b.Navigation("DesejoProdutos");
+                    b.Navigation("Pessoas");
                 });
 #pragma warning restore 612, 618
         }

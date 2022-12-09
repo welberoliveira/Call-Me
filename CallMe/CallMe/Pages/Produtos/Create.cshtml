@@ -1,0 +1,46 @@
+﻿@page
+@model CallMe.Pages.Produtos.CreateModel
+@{
+    ViewData["Title"] = "Cadastrar Produto/Serviço";
+}
+
+<h1>Cadastrar Produto/Serviço</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Produto.Nome)
+                <input asp-for="Produto.Nome" class="form-control" />
+                <span asp-validation-for="Produto.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Produto.Observacao)
+                <input asp-for="Produto.Observacao" class="form-control" />
+                <span asp-validation-for="Produto.Observacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Produto.Categoria)
+                <select asp-for="Produto.CategoriaID" class="form-control"
+                        asp-items="@Model.CategoriaNomeSelect">
+                    <option value="">-- Selecione a Categoria --</option>
+                </select>
+                <span asp-validation-for="Produto.CategoriaID" class="text-danger" />
+            </div>
+            <div class="form-group mt-2">
+                <a asp-page="./Index" class="btn btn-info">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
